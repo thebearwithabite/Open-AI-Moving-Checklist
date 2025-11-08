@@ -4,3 +4,26 @@
 *.ptx
 *.cubin
 *.fatbin
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Output files
+to_bio_extracted.json
+chat_export.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

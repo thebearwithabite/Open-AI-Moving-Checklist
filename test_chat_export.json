@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "TO:BIO - I prefer working in the evenings and need quiet time to focus."
+  },
+  {
+    "role": "assistant",
+    "content": "I understand. I'll keep that in mind for scheduling."
+  },
+  {
+    "role": "user",
+    "content": "memory/project - The project uses Python 3.12 and requires async/await patterns."
+  },
+  {
+    "role": "user",
+    "content": "Add this to bio: I have a cat named Whiskers who is very friendly."
+  },
+  {
+    "role": "user",
+    "content": "TO:BIO - I prefer working in the evenings and need quiet time to focus."
+  },
+  {
+    "role": "user",
+    "content": "This is just a regular message without any bio markers."
+  },
+  {
+    "role": "user",
+    "content": "save this in my memory - I graduated from MIT in 2015."
+  },
+  {
+    "role": "assistant",
+    "content": "Got it, I'll remember that."
+  }
+]
