@@ -65,6 +65,19 @@ If your export contains multiple JSON files:
 python src/persona_scraper.py /path/to/export_directory/ output.json
 ```
 
+#### Batch Process Multiple Exports
+
+Process multiple export files at once:
+```bash
+python src/batch_process.py /path/to/exports_directory/ /path/to/output_directory/
+```
+
+This will:
+- Find all JSON files in the input directory
+- Extract persona data from each one
+- Save individual output files with `persona_` prefix
+- Provide a summary of successful and failed extractions
+
 ## How to Get Your OpenAI Export
 
 1. Log into your OpenAI account

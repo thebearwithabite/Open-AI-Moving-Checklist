@@ -18,7 +18,10 @@ This tool scrapes all your:
 ## Quick Start
 
 ```bash
-# Extract your persona data
+# Run the quick setup (recommended)
+./setup.sh
+
+# Or extract your persona data directly
 python src/persona_scraper.py /path/to/openai_export.json
 
 # Specify custom output
