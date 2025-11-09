@@ -1,7 +1,7 @@
 #!/bin/bash
-# Quick setup script for GPT-4o Persona Data Scraper
+# Quick setup script for ChatGPT Memory Fragment Scraper
 
-echo "🚀 GPT-4o Persona Data Scraper - Quick Setup"
+echo "🚀 ChatGPT Memory Fragment Scraper - Quick Setup"
 echo "============================================="
 echo ""
 
@@ -22,7 +22,7 @@ echo "✓ Made scraper executable"
 # Test with example data
 echo ""
 echo "Testing with example data..."
-python3 src/persona_scraper.py data/examples/sample_openai_export.json /tmp/test_persona.json
+python3 src/persona_scraper.py data/examples/sample_openai_export.json /tmp/test_memory_fragments.json
 
 if [ $? -eq 0 ]; then
     echo ""
@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
     echo "  python3 src/persona_scraper.py <your_export.json> [output.json]"
     echo ""
     echo "Example:"
-    echo "  python3 src/persona_scraper.py ~/Downloads/openai_export.json my_persona.json"
+    echo "  python3 src/persona_scraper.py ~/Downloads/openai_export.json my_memory_fragments.json"
     echo ""
     echo "📖 See docs/USAGE.md for more information"
     echo ""
