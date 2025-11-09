@@ -1,0 +1,65 @@
+{
+  "bio": {
+    "bio": "AI enthusiast and creative writer exploring the boundaries of human-AI collaboration.",
+    "description": "A curious learner with a passion for technology and storytelling",
+    "about_me": "I love exploring new ideas and helping others through thoughtful conversation"
+  },
+  "profile": {
+    "name": "Jane Doe",
+    "username": "janedoe_gpt4o",
+    "email": "jane@example.com",
+    "preferences": {
+      "language": "en",
+      "theme": "dark",
+      "notification_settings": {
+        "email": true,
+        "push": false
+      }
+    }
+  },
+  "memory": [
+    {
+      "conversation_id": "conv_123456",
+      "title": "Discussing AI Ethics",
+      "date": "2024-01-15",
+      "context": "Deep discussion about the ethical implications of AI",
+      "summary": "Explored topics around AI safety, bias, and responsible development"
+    },
+    {
+      "conversation_id": "conv_789012",
+      "title": "Creative Writing Session",
+      "date": "2024-01-20",
+      "context": "Brainstorming ideas for a science fiction story",
+      "summary": "Developed characters and plot for a story about AI consciousness"
+    },
+    {
+      "type": "preference",
+      "content": "Prefers detailed explanations with examples"
+    },
+    {
+      "type": "interest",
+      "content": "Particularly interested in the intersection of AI and creativity"
+    },
+    {
+      "type": "context",
+      "content": "Working on a novel that explores human-AI relationships"
+    }
+  ],
+  "keywords": [
+    "AI ethics",
+    "creative writing",
+    "technology",
+    "philosophy",
+    "storytelling",
+    "innovation",
+    "artificial intelligence",
+    "tech-enthusiast",
+    "writer",
+    "curious-learner"
+  ],
+  "metadata": {
+    "source": "data/examples/sample_openai_export.json",
+    "scraped_at": "2024-01-25T12:00:00.000000",
+    "version": "1.0.0"
+  }
+}
