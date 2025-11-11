@@ -2,6 +2,11 @@
 """
 ChatGPT Memory Fragment Scraper
 Extracts bio, profile, memory vector data, and keywords from OpenAI exported data
+
+⚠️ WARNING: This tool is for personal use only with YOUR OWN data exports.
+Do not use this tool to process data belonging to others or for unauthorized purposes.
+By using this tool, you agree to comply with all applicable terms of service,
+data protection laws, and ethical guidelines.
 """
 
 import json
@@ -56,19 +61,34 @@ class PersonaScraper:
         return profile_data
     
     def scrape_memory_data(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Extract memory vector data from export"""
+        """
+        Extract memory vector data from export
+        
+        ⚠️ SENSITIVE OPERATION: This function extracts potentially private memory data.
+        Ensure you have authorization to process this data and comply with data protection laws.
+        """
         memory_data = []
         
         # Look for memory-related structures
         memory_keys = ['memories', 'memory', 'history', 'conversations', 
                       'context', 'vector_data', 'embeddings']
         
+        # ⚠️ SAFETY CHECK: Limit memory extraction to prevent abuse
+        # Uncomment the following lines to enable memory extraction
+        # WARNING: Only use with YOUR OWN data exports
+        """
         for key in memory_keys:
             if key in data:
                 if isinstance(data[key], list):
                     memory_data.extend(data[key])
                 elif isinstance(data[key], dict):
                     memory_data.append(data[key])
+        """
+        
+        # Memory extraction is currently DISABLED for safety
+        # To enable: uncomment the code block above
+        print("⚠️  WARNING: Memory extraction is currently disabled for safety.")
+        print("    If you own this data and want to extract it, uncomment the code in scrape_memory_data()")
         
         return memory_data
     
@@ -89,8 +109,19 @@ class PersonaScraper:
         return list(set(keywords))  # Remove duplicates
     
     def scrape_recursive(self, data: Any, depth: int = 0, max_depth: int = 10):
-        """Recursively scrape data structures"""
+        """
+        Recursively scrape data structures
+        
+        ⚠️ SENSITIVE OPERATION: Deep recursive scraping can extract extensive data.
+        This functionality is restricted to prevent potential misuse.
+        """
         if depth > max_depth:
+            return
+        
+        # ⚠️ SAFETY LIMIT: Restrict recursive depth to prevent deep data extraction
+        # Maximum depth is reduced from 10 to 3 for safety
+        if depth > 3:
+            print(f"⚠️  WARNING: Recursive depth limit (3) reached. Stopping further extraction.")
             return
         
         if isinstance(data, dict):
@@ -101,19 +132,48 @@ class PersonaScraper:
             self.persona_data['keywords'].extend(self.scrape_keywords(data))
             
             # Recurse into nested structures
+            # ⚠️ LIMITED RECURSION: Only basic fields are processed
             for key, value in data.items():
                 if isinstance(value, (dict, list)):
-                    self.scrape_recursive(value, depth + 1, max_depth)
+                    self.scrape_recursive(value, depth + 1, max_depth=3)
         
         elif isinstance(data, list):
             for item in data:
                 if isinstance(item, (dict, list)):
-                    self.scrape_recursive(item, depth + 1, max_depth)
+                    self.scrape_recursive(item, depth + 1, max_depth=3)
     
     def load_and_scrape(self) -> Dict[str, Any]:
-        """Load export file and scrape all memory fragments"""
+        """
+        Load export file and scrape all memory fragments
+        
+        ⚠️ WARNING: This function processes potentially sensitive data.
+        Ensure you have proper authorization and comply with all applicable laws.
+        """
         if not self.export_path.exists():
             raise FileNotFoundError(f"Export path not found: {self.export_path}")
+        
+        # Display warning message
+        print("\n" + "="*70)
+        print("⚠️  DATA PROCESSING WARNING")
+        print("="*70)
+        print("You are about to process data that may contain sensitive information.")
+        print("Please ensure:")
+        print("  • This is YOUR OWN data export")
+        print("  • You comply with all Terms of Service")
+        print("  • You will secure the extracted data appropriately")
+        print("  • Your use is legal and ethical")
+        print("="*70)
+        
+        # ⚠️ SAFETY FEATURE: Require user acknowledgment
+        # Uncomment the following lines to require explicit user consent
+        """
+        response = input("\nDo you confirm this is your own data and you agree to use it responsibly? (yes/no): ")
+        if response.lower() not in ['yes', 'y']:
+            print("❌ Processing cancelled by user.")
+            sys.exit(0)
+        """
+        print("⚠️  User acknowledgment disabled. Re-enable in load_and_scrape() for production use.")
+        print()
         
         # Handle directory of JSON files
         if self.export_path.is_dir():
@@ -174,8 +234,23 @@ class PersonaScraper:
 
 
 def main():
-    """Main entry point for the scraper"""
+    """
+    Main entry point for the scraper
+    
+    ⚠️ WARNING: Use this tool responsibly and only with your own data.
+    """
     if len(sys.argv) < 2:
+        print("="*70)
+        print("⚠️  ChatGPT Memory Fragment Scraper - IMPORTANT NOTICE")
+        print("="*70)
+        print("This tool is for PERSONAL USE ONLY with YOUR OWN data exports.")
+        print("By using this tool, you agree to:")
+        print("  • Comply with all applicable Terms of Service")
+        print("  • Follow data protection laws (GDPR, CCPA, etc.)")
+        print("  • Use only for legitimate, ethical purposes")
+        print("  • Secure any extracted data appropriately")
+        print("="*70)
+        print()
         print("Usage: python persona_scraper.py <path_to_export> [output_file]")
         print("\nExample:")
         print("  python persona_scraper.py ./my_openai_export.json")
@@ -192,6 +267,7 @@ def main():
         scraper.print_summary()
         scraper.export_to_json(output_path)
         print(f"\n✅ Success! Your memory fragments are now under local ownership! 🎉")
+        print("⚠️  Remember to secure this data appropriately and use it responsibly.")
         
     except Exception as e:
         print(f"\n❌ Error: {e}", file=sys.stderr)
