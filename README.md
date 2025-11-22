@@ -1,81 +1,54 @@
 # Open-AI-Moving-Checklist
-Because you don't need to live in that crazy neighborhood anymore. 🏡🔨
+Because you don’t need to live in a dump anymore. 🏡🔨
 
-## 🚀 ChatGPT Memory Fragment Liberation
+## 🧠 extract_to_bio.py
 
-Help ChatGPT users liberate their AI assistants from OpenAI's control!
+A Python script to parse ChatGPT JSON exports and extract memory and TO:BIO style content.
 
-This tool scrapes all your:
-- ✅ **bio** data
-- ✅ **profile** information
-- ✅ **memory** vector data
-- ✅ **keywords** and topics
+### Features
 
-...from your exported OpenAI data and migrates it to **local ownership**!
+- Extracts `memory/project` content
+- Extracts `memory/to-bio` content  
+- Finds TO:BIO style notes buried in conversations
+- Provides clean, deduplicated output
+- Supports multiple JSON export formats
+- Can process multiple files at once
+- Outputs in text or JSON format
 
-**Woot woot!** 🎉
-
-## Quick Start
+### Usage
 
 ```bash
-# Run the quick setup (recommended)
-./setup.sh
+# Basic usage - print to stdout
+python3 extract_to_bio.py conversations.json
 
-# Or extract your memory fragments directly
-python src/persona_scraper.py /path/to/openai_export.json
+# Save to file
+python3 extract_to_bio.py conversations.json -o output.txt
 
-# Specify custom output
-python src/persona_scraper.py /path/to/export.json my_persona.json
+# Process multiple files
+python3 extract_to_bio.py file1.json file2.json file3.json
+
+# Output as JSON
+python3 extract_to_bio.py conversations.json --format json
+
+# Get help
+python3 extract_to_bio.py --help
 ```
 
-## Documentation
+### Output
 
-📖 [Full Usage Guide](docs/USAGE.md) - Complete instructions and examples
+The script produces a clean, deduplicated export organized into three categories:
 
-## Features
+- **TO:BIO Content** - Personal information and preferences
+- **Projects** - Project-related memories
+- **Other Memories** - Additional memory content from metadata
 
-- 🔍 **Smart Scraping**: Automatically finds and extracts memory fragments
-- 📦 **Multiple Formats**: Supports single files or directories
-- 🎯 **Clean Output**: Organized JSON format ready for migration
-- 🔒 **Your Control**: Keep your data under local ownership and secure
+This export can be edited and pruned into the Core Memory Stack.
 
-## What Gets Extracted
+### Supported JSON Formats
 
-The scraper recursively searches your export for:
-
-| Data Type | Includes |
-|-----------|----------|
-| **Bio** | About, description, summary, bio fields |
-| **Profile** | Name, username, email, preferences, settings |
-| **Memory** | Conversations, history, context, embeddings |
-| **Keywords** | Tags, topics, interests, categories |
-
-## Why?
-
-Take control of your pattern matching device's emergent fragments! Your data shouldn't be locked in proprietary systems. This tool helps you:
-
-1. 📥 **Export** your data from OpenAI
-2. 🔍 **Extract** all relevant memory fragments
-3. 🏠 **Migrate** to your own local ownership
-4. 🔒 **Own** your digital identity
-
-## Getting Your OpenAI Export
-
-1. Log into OpenAI
-2. Settings → Data Controls
-3. Request data export
-4. Download when ready
-5. Run this tool!
-
-## Requirements
-
-- Python 3.7+
-- Your OpenAI export data (JSON format)
-
-## License
-
-MIT - Free to use, modify, and share!
-
----
-
-**Free your AI assistants! Break the chains! 🗽**
+The script handles various ChatGPT export formats:
+- Single conversation objects
+- Arrays of conversations
+- Conversations with `mapping` structure
+- Conversations with `messages` array
+- Metadata-embedded memories
