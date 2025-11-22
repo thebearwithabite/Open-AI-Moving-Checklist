@@ -1,54 +1,164 @@
-# Open-AI-Moving-Checklist
-Because you don’t need to live in a dump anymore. 🏡🔨
+# ChatGPT Memory Fragment Scraper 🚀
 
-## 🧠 extract_to_bio.py
+## Overview
 
-A Python script to parse ChatGPT JSON exports and extract memory and TO:BIO style content.
+This tool helps ChatGPT users extract their memory fragments (bio, profile, memory vectors, keywords, etc.) from OpenAI exported data and migrate it to local ownership - taking control of your data!
 
-### Features
+**Because you don't need to live in that crazy neighborhood anymore. 🏡🔨**
 
-- Extracts `memory/project` content
-- Extracts `memory/to-bio` content  
-- Finds TO:BIO style notes buried in conversations
-- Provides clean, deduplicated output
-- Supports multiple JSON export formats
-- Can process multiple files at once
-- Outputs in text or JSON format
+## What It Does
+
+The scraper extracts the following data from your OpenAI export:
+
+- **Bio Data**: About sections, descriptions, summaries
+- **Profile Data**: Name, username, preferences, settings
+- **Memory Vectors**: Conversation history, context, embeddings
+- **Keywords**: Tags, topics, interests, categories
+
+All extracted data is saved in a clean JSON format that you can:
+- Store under your own local ownership
+- Import into other systems
+- Backup and version control
+- Keep private and secure
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.7 or higher
+- Your OpenAI export data (JSON format)
+
+### Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/thebearwithabite/Open-AI-Moving-Checklist.git
+cd Open-AI-Moving-Checklist
+```
+
+2. Make the scraper executable:
+```bash
+chmod +x src/persona_scraper.py
+```
 
 ### Usage
 
+#### Basic Usage
+
+Extract data from a single JSON file:
 ```bash
-# Basic usage - print to stdout
-python3 extract_to_bio.py conversations.json
-
-# Save to file
-python3 extract_to_bio.py conversations.json -o output.txt
-
-# Process multiple files
-python3 extract_to_bio.py file1.json file2.json file3.json
-
-# Output as JSON
-python3 extract_to_bio.py conversations.json --format json
-
-# Get help
-python3 extract_to_bio.py --help
+python src/persona_scraper.py /path/to/openai_export.json
 ```
 
-### Output
+This will create `memory_fragments.json` in the current directory.
 
-The script produces a clean, deduplicated export organized into three categories:
+#### Specify Output File
 
-- **TO:BIO Content** - Personal information and preferences
-- **Projects** - Project-related memories
-- **Other Memories** - Additional memory content from metadata
+```bash
+python src/persona_scraper.py /path/to/export.json my_memory_fragments.json
+```
 
-This export can be edited and pruned into the Core Memory Stack.
+#### Process Directory of Files
 
-### Supported JSON Formats
+If your export contains multiple JSON files:
+```bash
+python src/persona_scraper.py /path/to/export_directory/ output.json
+```
 
-The script handles various ChatGPT export formats:
-- Single conversation objects
-- Arrays of conversations
-- Conversations with `mapping` structure
-- Conversations with `messages` array
-- Metadata-embedded memories
+#### Batch Process Multiple Exports
+
+Process multiple export files at once:
+```bash
+python src/batch_process.py /path/to/exports_directory/ /path/to/output_directory/
+```
+
+This will:
+- Find all JSON files in the input directory
+- Extract memory fragments from each one
+- Save individual output files with `memory_fragments_` prefix
+- Provide a summary of successful and failed extractions
+
+## How to Get Your OpenAI Export
+
+1. Log into your OpenAI account
+2. Go to Settings → Data Controls
+3. Request an export of your data
+4. Download the export when ready
+5. Use this tool to extract your memory fragments!
+
+## Output Format
+
+The scraper produces a JSON file with the following structure:
+
+```json
+{
+  "bio": {
+    "description": "Your bio data...",
+    "about": "..."
+  },
+  "profile": {
+    "name": "Your Name",
+    "preferences": {...}
+  },
+  "memory": [
+    {
+      "conversation_id": "...",
+      "context": "..."
+    }
+  ],
+  "keywords": [
+    "topic1",
+    "topic2"
+  ],
+  "metadata": {
+    "source": "/path/to/export",
+    "scraped_at": "2024-01-01T00:00:00",
+    "version": "1.0.0"
+  }
+}
+```
+
+## Examples
+
+See the `data/examples/` directory for example input and output files.
+
+## Taking Control of Your Data 🎯
+
+Once you've extracted your data:
+
+1. **Store it securely** on your own server or domain
+2. **Version control it** with Git
+3. **Backup regularly** to multiple locations
+4. **Share selectively** - only with services you trust
+5. **Keep it private** - it's YOUR data, YOUR choice
+
+## Contributing
+
+Contributions welcome! Feel free to:
+- Report issues
+- Suggest features
+- Submit pull requests
+- Share your migration stories
+
+## License
+
+MIT License - Use freely, modify as needed, share with others!
+
+## Support
+
+Having issues? Found a bug? Have suggestions?
+- Open an issue on GitHub
+- Check existing issues for solutions
+- Contribute improvements
+
+## Roadmap
+
+- [ ] Support for more export formats
+- [ ] Direct upload to local storage systems
+- [ ] Encryption options for sensitive data
+- [ ] Migration guides for specific platforms
+- [ ] Automated backup scheduling
+
+---
+
+**Free your data! 🎉 Woot woot!**
